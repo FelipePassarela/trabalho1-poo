@@ -128,7 +128,6 @@ public class Eleicao {
 
     public boolean isValido(Candidato candidato) {
         return candidato.getCargo() == Cargo.VEREADOR && 
-            candidato.getCodigoMunicipio().equals("57053") && // Debug
             candidato.getSituacao() != Situacao.INVALIDO;
     }
 

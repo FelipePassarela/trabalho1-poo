@@ -44,8 +44,6 @@ public class VotoReader {
 
     private static boolean isValido(Voto voto) {
         boolean isNumValido = !(voto.getNumVotavel() >= 95 && voto.getNumVotavel() <= 98);
-        return voto.getCargo() == Cargo.VEREADOR && 
-            voto.getCodigoMunicipio().equals("57053") && // Debug
-            isNumValido;
+        return voto.getCargo() == Cargo.VEREADOR && isNumValido;
     }
 }
