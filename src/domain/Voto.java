@@ -1,3 +1,7 @@
+package domain;
+
+import enums.Cargo;
+
 public class Voto {
     private final Cargo cargo;
     private final String codigoMunicipio;

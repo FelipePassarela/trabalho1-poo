@@ -1,6 +1,13 @@
-import java.util.Set;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Set;
+
+import domain.Candidato;
+import domain.Eleicao;
+import domain.Voto;
+import io.CandidatoReader;
+import io.VotoReader;
+import report.Relatorio;
 
 public class App {
     public static void main(String[] args) {

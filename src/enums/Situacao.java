@@ -1,3 +1,5 @@
+package enums;
+
 public enum Situacao {
     ELEITO(1, "Eleito"),
     ELEITO_POR_QP(2, "Eleito por QP"),

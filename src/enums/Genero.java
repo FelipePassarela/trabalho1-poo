@@ -1,3 +1,5 @@
+package enums;
+
 public enum Genero {
     MASCULINO(2, "Masculino"),
     FEMININO(4, "Feminino");

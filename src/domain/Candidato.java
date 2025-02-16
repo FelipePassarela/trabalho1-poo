@@ -1,6 +1,12 @@
+package domain;
+
 import java.text.NumberFormat;
 import java.time.LocalDate;
 import java.util.Locale;
+
+import enums.Cargo;
+import enums.Genero;
+import enums.Situacao;
 
 public class Candidato implements Comparable<Candidato> {
     private String codigoMunicipio;

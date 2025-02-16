@@ -1,3 +1,5 @@
+package io;
+
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -8,6 +10,12 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+
+import domain.Candidato;
+import domain.Partido;
+import enums.Cargo;
+import enums.Genero;
+import enums.Situacao;
 
 public class CandidatoReader {
     private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yyyy");

@@ -1,9 +1,16 @@
+package report;
+
 import java.text.NumberFormat;
 import java.time.LocalDate;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Locale;
+
+import domain.Candidato;
+import domain.Eleicao;
+import domain.Partido;
+import enums.Genero;
 
 public class Relatorio {
     Eleicao eleicao;
@@ -91,9 +98,11 @@ public class Relatorio {
         int index = 0;
         for (Partido partido : partidos) {
             List<Candidato> candidatosPartido = partido.getCandidatos();
+            
             if(candidatosPartido.isEmpty() || partido.getNumVotosNominais() <= 0){
                 continue;
             }
+
             Collections.sort(candidatosPartido);
             Candidato primeiroColocado = candidatosPartido.get(0);
             Candidato ultimoColocado = candidatosPartido.get(candidatosPartido.size() - 1);
