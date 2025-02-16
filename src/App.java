@@ -9,15 +9,15 @@ public class App {
             System.exit(1);
         }
         
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         String candidatosCSV = args[0];
         String votosCSV = args[1];
-        LocalDate dataEleicao = LocalDate.parse(args[2], formatter);
+        LocalDate dataEleicao = LocalDate.parse(args[2], DateTimeFormatter.ofPattern("dd/MM/yyyy"));
         
         Eleicao eleicao = Eleicao.getInstance();
 
         Set<Candidato> candidatos = CandidatoReader.readCandidatos(candidatosCSV);
         Set<Voto> votos = VotoReader.readVotos(votosCSV);
+        
         eleicao.addCandidatos(candidatos);
         eleicao.computaVotos(votos);
 
