@@ -12,8 +12,7 @@ import report.Relatorio;
 public class App {
     public static void main(String[] args) {
         if (args.length != 3) {
-            System.out.println("Uso: java App <candidatos.csv> <votos.csv> <data da eleição>");
-            System.exit(1);
+            throw new IllegalArgumentException("Uso: java App <candidatos.csv> <votos.csv> <data da eleição>");
         }
         
         String candidatosCSV = args[0];

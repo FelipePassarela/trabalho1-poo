@@ -19,10 +19,16 @@ public class Partido implements Comparable<Partido> {
     }
 
     public void incrementaVotosNominais(int numVotos) {
+        if (numVotos < 0) {
+            throw new IllegalArgumentException("Número de votos nominais não pode ser negativo");
+        }
         numVotosNominais += numVotos;
     }
 
     public void incrementaVotosLegenda(int numVotos) {
+        if (numVotos < 0) {
+            throw new IllegalArgumentException("Número de votos de legenda não pode ser negativo");
+        }
         numVotosLegenda += numVotos;
     }
 
