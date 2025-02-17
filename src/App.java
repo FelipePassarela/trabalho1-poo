@@ -8,6 +8,7 @@ import domain.Voto;
 import io.CandidatoReader;
 import io.VotoReader;
 import report.Relatorio;
+import services.VotacaoService;
 
 public class App {
     public static void main(String[] args) {
@@ -24,7 +25,8 @@ public class App {
         Set<Voto> votos = VotoReader.readVotos(votosCSV);
 
         eleicao.addCandidatos(candidatos);
-        eleicao.computaVotos(votos);
+        VotacaoService votacaoService = new VotacaoService(eleicao);
+        votacaoService.computaVotos(votos);
 
         Relatorio relatorio = new Relatorio(eleicao);
         relatorio.imprimeNumVagas();

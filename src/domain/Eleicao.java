@@ -87,24 +87,6 @@ public class Eleicao {
     public Partido findPartido(int numero) {
         return partidos.get(numero);
     }
-    
-    public void computaVotos(Iterable<Voto> votos) {
-        for (Voto voto : votos) {
-            if (voto.isNominal()) {
-                Candidato candidato = findCandidato(voto.getCodigoMunicipio(), voto.getNumVotavel());
-                if (candidato != null) {
-                    Partido partido = candidato.getPartido();
-                    candidato.incrementaVotos(voto.getQuantidade());
-                    partido.incrementaVotosNominais(voto.getQuantidade());
-                }
-            } else {
-                Partido partido = findPartido(voto.getNumVotavel());
-                if (partido != null) {
-                    partido.incrementaVotosLegenda(voto.getQuantidade());
-                }
-            }
-        }
-    }
 
     public List<Candidato> getCandidatosEleitos() {
         List<Candidato> eleitos = new ArrayList<>(numVagas);
