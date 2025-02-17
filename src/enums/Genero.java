@@ -2,7 +2,8 @@ package enums;
 
 public enum Genero {
     MASCULINO(2, "Masculino"),
-    FEMININO(4, "Feminino");
+    FEMININO(4, "Feminino"),
+    INDEFINIDO(0, "Indefinido");
 
     private int codigo;
     private String descricao;
@@ -26,7 +27,6 @@ public enum Genero {
                 return genero;
             }
         }
-
-        return null;
+        return INDEFINIDO;
     }
 }
