@@ -1,9 +1,10 @@
 package io;
 
 import java.io.BufferedReader;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
@@ -16,11 +17,7 @@ public class VotoReader {
     public static Set<Voto> readVotos(String filePath) {
         Set<Voto> votos = new HashSet<>();
 
-        try (
-            FileInputStream fis = new FileInputStream(filePath);
-            InputStreamReader isr = new InputStreamReader(fis, "ISO-8859-1");
-            BufferedReader br = new BufferedReader(isr);
-        ) {
+        try (BufferedReader br = Files.newBufferedReader(Paths.get(filePath), StandardCharsets.ISO_8859_1)) {
             String headerLine = br.readLine();
             Map<String, Integer> headerIndexMap = CandidatoReader.criaMap(headerLine);
 
