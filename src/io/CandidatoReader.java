@@ -2,12 +2,8 @@ package io;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
@@ -17,6 +13,7 @@ import domain.Partido;
 import enums.Cargo;
 import enums.Genero;
 import enums.Situacao;
+import util.CSVUtil;
 
 public class CandidatoReader {
     private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yyyy");
@@ -24,35 +21,14 @@ public class CandidatoReader {
     public static Set<Candidato> readCandidatos(String filePath) {
         Set<Candidato> candidatos = new HashSet<>();
 
-        try (BufferedReader br = Files.newBufferedReader(Paths.get(filePath), StandardCharsets.ISO_8859_1)) {
-            String headerLine = br.readLine();
-            Map<String, Integer> headerIndexMap = criaMap(headerLine);
+        try (BufferedReader br = CSVUtil.getReader(filePath)) {
+            String line = br.readLine();
+            Map<String, Integer> headerIndexMap = CSVUtil.parseHeader(line);
             
-            String line;
             while ((line = br.readLine()) != null) {
                 String[] fields = line.split(";");
-
-                for (int i = 0; i < fields.length; i++) {
-                    fields[i] = fields[i].replace("\"", "").trim();
-                }
-
-                String codigoMunicipio = fields[headerIndexMap.get("SG_UE")];
-                Cargo cargo = Cargo.valueOfCodigo(Integer.parseInt(fields[headerIndexMap.get("CD_CARGO")]));
-                int numero = Integer.parseInt(fields[headerIndexMap.get("NR_CANDIDATO")]);
-                String nomeUrna = fields[headerIndexMap.get("NM_URNA_CANDIDATO")];
-                Partido partido = new Partido(
-                    Integer.parseInt(fields[headerIndexMap.get("NR_PARTIDO")]), 
-                    fields[headerIndexMap.get("SG_PARTIDO")]);
-                int numFederacao = Integer.parseInt(fields[headerIndexMap.get("NR_FEDERACAO")]);
-                LocalDate dataNascimento = LocalDate.parse(fields[headerIndexMap.get("DT_NASCIMENTO")], FORMATTER);
-                Situacao situacao = Situacao.valueOfCodigo(Integer.parseInt(fields[headerIndexMap.get("CD_SIT_TOT_TURNO")]));
-                Genero genero = Genero.valueOfCodigo(Integer.parseInt(fields[headerIndexMap.get("CD_GENERO")]));
-        
-                Candidato candidato = new Candidato(
-                    codigoMunicipio, cargo, numero, 
-                    nomeUrna, partido, numFederacao, 
-                    dataNascimento, situacao, genero
-                );
+                fields = CSVUtil.cleanFields(fields);
+                Candidato candidato = parseCandidato(headerIndexMap, fields);
                 candidatos.add(candidato);
             }
         } catch (IOException e) {
@@ -62,15 +38,23 @@ public class CandidatoReader {
         return candidatos;
     }
 
-    public static Map<String, Integer> criaMap(String headerLine) {
-        Map<String, Integer> map = new HashMap<>();
-        String[] headers = headerLine.split(";");
-
-        for (int i = 0; i < headers.length; i++) {
-            headers[i] = headers[i].replace("\"", "").trim();
-            map.put(headers[i], i);
-        }
-
-        return map;
+    private static Candidato parseCandidato(Map<String, Integer> headerIndexMap, String[] fields) {
+        String codigoMunicipio = fields[headerIndexMap.get("SG_UE")];
+        Cargo cargo = Cargo.valueOfCodigo(Integer.parseInt(fields[headerIndexMap.get("CD_CARGO")]));
+        int numero = Integer.parseInt(fields[headerIndexMap.get("NR_CANDIDATO")]);
+        String nomeUrna = fields[headerIndexMap.get("NM_URNA_CANDIDATO")];
+        Partido partido = new Partido(
+            Integer.parseInt(fields[headerIndexMap.get("NR_PARTIDO")]), 
+            fields[headerIndexMap.get("SG_PARTIDO")]);
+        int numFederacao = Integer.parseInt(fields[headerIndexMap.get("NR_FEDERACAO")]);
+        LocalDate dataNascimento = LocalDate.parse(fields[headerIndexMap.get("DT_NASCIMENTO")], FORMATTER);
+        Situacao situacao = Situacao.valueOfCodigo(Integer.parseInt(fields[headerIndexMap.get("CD_SIT_TOT_TURNO")]));
+        Genero genero = Genero.valueOfCodigo(Integer.parseInt(fields[headerIndexMap.get("CD_GENERO")]));
+      
+        return new Candidato(
+            codigoMunicipio, cargo, numero, 
+            nomeUrna, partido, numFederacao, 
+            dataNascimento, situacao, genero
+        );
     }
 }
