@@ -23,18 +23,13 @@ public class VotoReader {
                 String[] fields = line.split(";");
                 fields = CSVUtil.cleanFields(fields);
                 Voto voto = parseVoto(headerIndexMap, fields);
-                if (isValido(voto)) votos.add(voto);
+                votos.add(voto);
             }
         } catch (IOException e) {
             System.err.println("Erro ao ler arquivo de votos: " + e.getMessage());
         }
 
         return votos;
-    }
-
-    private static boolean isValido(Voto voto) {
-        boolean isNumValido = !(voto.getNumVotavel() >= 95 && voto.getNumVotavel() <= 98);
-        return voto.getCargo() == Cargo.VEREADOR && isNumValido;
     }
 
     private static Voto parseVoto(Map<String, Integer> headerIndexMap, String[] fields) {
