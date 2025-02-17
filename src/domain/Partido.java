@@ -65,24 +65,31 @@ public class Partido implements Comparable<Partido> {
     @Override
     public String toString() {
         NumberFormat nf = NumberFormat.getInstance(Locale.forLanguageTag("pt-BR"));
-        String msgTotalVotos = getNumVotosTotais() > 1 ? " votos" : " voto";
-        String msgVotosNominais = numVotosNominais > 1 ? " nominais e " : " nominal e ";
-        String msgVotosLegenda = numVotosLegenda > 1 ? " de legenda)" : " de legenda)";
-        String msgCandidatosEleitos = candidatosEleitos.size() > 1 ? " candidatos eleitos" : " candidato eleito";
+        String totalVotosStr = nf.format(getNumVotosTotais());
+        String votosNominaisStr = nf.format(numVotosNominais);
+        String votosLegendaStr = nf.format(numVotosLegenda);
 
-        return sigla + " - " + numero + ", " + nf.format(getNumVotosTotais()) + msgTotalVotos + " (" + 
-            nf.format(numVotosNominais) + msgVotosNominais + nf.format(numVotosLegenda) + msgVotosLegenda +
-            ", " + candidatosEleitos.size() + msgCandidatosEleitos;
+        String pluralTotal = getNumVotosTotais() > 1 ? " votos" : " voto";
+        String pluralNominal = numVotosNominais > 1 ? " nominais" : " nominal";
+        String legendaTexto = " de legenda";
+        String pluralEleitos = candidatosEleitos.size() > 1 ? " candidatos eleitos" : " candidato eleito";
+
+        return String.format("%s - %d, %s%s (%s%s e %s%s), %d%s",
+            sigla,
+            numero,
+            totalVotosStr, pluralTotal,
+            votosNominaisStr, pluralNominal,
+            votosLegendaStr, legendaTexto,
+            candidatosEleitos.size(), pluralEleitos
+        );
     }
 
     @Override
     public int compareTo(Partido o) {
         int diff = Integer.compare(o.getNumVotosTotais(), getNumVotosTotais());
-
         if (diff == 0) {
             diff = -Integer.compare(o.getNumero(), numero);
         }
-
         return diff;
     }
 }

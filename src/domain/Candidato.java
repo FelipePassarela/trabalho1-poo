@@ -97,10 +97,14 @@ public class Candidato implements Comparable<Candidato> {
     @Override
     public String toString() {
         NumberFormat nf = NumberFormat.getInstance(Locale.forLanguageTag("pt-BR"));
-        String indicadorParticipaFederacao = numFederacao != -1 ? "*" : "";
+        boolean participaFederacao = numFederacao != -1;
         
-        return indicadorParticipaFederacao + nomeUrna.toUpperCase() + " (" + 
-               partido.getSigla() + ", " + nf.format(numVotos) + " votos)";
+        return String.format("%s %s (%s, %s votos)", 
+            participaFederacao ? "*" : "",
+            nomeUrna.toUpperCase(),
+            partido.getSigla(),
+            nf.format(numVotos)
+        );
     }
 
     @Override

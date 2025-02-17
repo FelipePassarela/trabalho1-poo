@@ -109,12 +109,9 @@ public class Relatorio {
             NumberFormat nf = NumberFormat.getInstance(Locale.forLanguageTag("pt-BR"));
 
             System.out.print(++index + " - " + partido.getSigla() + " - " + partido.getNumero() + ", ");
-            System.out.print(primeiroColocado.getNomeUrna() + " (" + 
-                primeiroColocado.getNumero() + ", " + 
-                nf.format(primeiroColocado.getNumVotos()) + " votos) / ");
-            System.out.println(ultimoColocado.getNomeUrna() + " (" + 
-                ultimoColocado.getNumero() + ", " + 
-                nf.format(ultimoColocado.getNumVotos()) + " votos)");
+            System.out.printf("%s (%d, %s votos) / %s (%d, %s votos)%n", 
+                primeiroColocado.getNomeUrna(), primeiroColocado.getNumero(), nf.format(primeiroColocado.getNumVotos()),
+                ultimoColocado.getNomeUrna(), ultimoColocado.getNumero(), nf.format(ultimoColocado.getNumVotos()));
         }
     }
 
@@ -208,8 +205,8 @@ public class Relatorio {
         String percentualMasculino = nf.format(masculinoCount / (double)candidatosEleitos.size());
 
         System.out.println("\nEleitos, por gênero:");
-        System.out.printf("%-10s %d (%s)%n", "Feminino:", femininoCount, percentualFeminino);  
-        System.out.printf("%-10s %d (%s)%n", "Masculino:", masculinoCount, percentualMasculino);  
+        System.out.printf("Feminino:  %d (%s)%n", femininoCount, percentualFeminino);  
+        System.out.printf("Masculino: %d (%s)%n", masculinoCount, percentualMasculino);  
     }
 
     public void imprimeTotalVotos() {        
@@ -226,8 +223,8 @@ public class Relatorio {
         String percentualVotosLegenda = nfPercent.format(totalVotosLegenda / (double)totalVotos);
 
         System.out.println();
-        System.out.printf("%-26s %s%n", "Total de votos válidos:", nf.format(totalVotos));
-        System.out.printf("%-26s %s (%s)%n", "Total de votos nominais:", nf.format(totalVotosNominais), percentualVotosNominais);
-        System.out.printf("%-26s %s (%s)%n", "Total de votos de legenda:", nf.format(totalVotosLegenda), percentualVotosLegenda);
+        System.out.printf("Total de votos válidos:    %s%n", nf.format(totalVotos));
+        System.out.printf("Total de votos nominais:   %s (%s)%n", nf.format(totalVotosNominais), percentualVotosNominais);
+        System.out.printf("Total de votos de legenda: %s (%s)%n", nf.format(totalVotosLegenda), percentualVotosLegenda);
     }
 }
