@@ -95,11 +95,9 @@ public class Candidato implements Comparable<Candidato> {
     @Override
     public int compareTo(Candidato o) {
         int diff = Integer.compare(o.numVotos, numVotos);
-
         if (diff == 0) {
             diff = dataNascimento.compareTo(o.dataNascimento);
         }
-
         return diff;
     }
 }
