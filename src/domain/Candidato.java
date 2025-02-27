@@ -1,8 +1,6 @@
 package domain;
 
-import java.text.NumberFormat;
 import java.time.LocalDate;
-import java.util.Locale;
 
 import enums.Cargo;
 import enums.Genero;
@@ -92,19 +90,6 @@ public class Candidato implements Comparable<Candidato> {
 
     public void setNumVotos(int numVotos) {
         this.numVotos = numVotos;
-    }
-
-    @Override
-    public String toString() {
-        NumberFormat nf = NumberFormat.getInstance(Locale.forLanguageTag("pt-BR"));
-        boolean participaFederacao = numFederacao != -1;
-        
-        return String.format("%s %s (%s, %s votos)", 
-            participaFederacao ? "*" : "",
-            nomeUrna.toUpperCase(),
-            partido.getSigla(),
-            nf.format(numVotos)
-        );
     }
 
     @Override

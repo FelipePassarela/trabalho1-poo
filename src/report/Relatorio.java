@@ -11,6 +11,8 @@ import domain.Candidato;
 import domain.Eleicao;
 import domain.Partido;
 import enums.Genero;
+import util.CandidatoFormatter;
+import util.PartidoFormatter;
 
 public class Relatorio {
     Eleicao eleicao;
@@ -28,7 +30,8 @@ public class Relatorio {
 
         int index = 0;
         for (Candidato candidato : eleicao.getCandidatosEleitos()) {
-            System.out.println(++index + " - " + candidato);
+            String candidatoFormatado = CandidatoFormatter.format(candidato);
+            System.out.println(++index + " - " + candidatoFormatado);
         }
     }
 
@@ -38,7 +41,8 @@ public class Relatorio {
 
         int index = 0;
         for (Candidato candidato : eleicao.getCandidatosMaisVotados()) {
-            System.out.println(++index + " - " + candidato);
+            String candidatoFormatado = CandidatoFormatter.format(candidato);
+            System.out.println(++index + " - " + candidatoFormatado);
             if (index >= eleicao.getNumVagas()) {
                 break;
             }
@@ -52,7 +56,8 @@ public class Relatorio {
         int index = 1;
         for (Candidato candidato : eleicao.getCandidatosMaisVotados()) {
             if (!eleicao.isEleito(candidato)) {
-                System.out.println(index + " - " + candidato);
+                String candidatoFormatado = CandidatoFormatter.format(candidato);
+                System.out.println(index + " - " + candidatoFormatado);
             }
             if (++index > eleicao.getNumVagas()) {
                 break;
@@ -71,7 +76,8 @@ public class Relatorio {
         for (Candidato candidato : candidatosMaisVotados) {
             if (eleicao.isEleito(candidato) && 
                 candidato.getNumVotos() < ultimoCandidatoMaisVotado.getNumVotos()) {
-                System.out.println(index + " - " + candidato);
+                String candidatoFormatado = CandidatoFormatter.format(candidato);
+                System.out.println(index + " - " + candidatoFormatado);
             }
             index++;
         }
@@ -85,7 +91,7 @@ public class Relatorio {
         int index = 0;
 
         for (Partido partido : partidos) {
-            System.out.println(++index + " - " + partido);
+            System.out.println(++index + " - " + PartidoFormatter.format(partido));
         }
     }
 
