@@ -12,17 +12,19 @@ import services.VotacaoService;
 
 public class App {
     public static void main(String[] args) {
-        if (args.length != 3) {
-            throw new IllegalArgumentException("Uso: java App <candidatos.csv> <votos.csv> <data da eleição>");
+        if (args.length != 4) {
+            throw new IllegalArgumentException(
+                "Uso: java App <código_municipio> <candidatos.csv> <votos.csv> <data_da_eleição>");
         }
         
-        String candidatosCSV = args[0];
-        String votosCSV = args[1];
-        LocalDate dataEleicao = LocalDate.parse(args[2], DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+        String codigoMunicipio = args[0];
+        String candidatosCSV = args[1];
+        String votosCSV = args[2];
+        LocalDate dataEleicao = LocalDate.parse(args[3], DateTimeFormatter.ofPattern("dd/MM/yyyy"));
         
-        Eleicao eleicao = Eleicao.getInstance();
+        Eleicao eleicao = Eleicao.getInstance(codigoMunicipio);
         Set<Candidato> candidatos = CandidatoReader.readCandidatos(candidatosCSV);
-        Set<Voto> votos = VotoReader.readVotos(votosCSV);
+        Set<Voto> votos = VotoReader.readVotos(votosCSV, eleicao.getCodigoMunicipio());
 
         eleicao.addCandidatos(candidatos);
         VotacaoService votacaoService = new VotacaoService(eleicao);

@@ -17,11 +17,13 @@ public class Eleicao {
     private static final Eleicao INSTANCE = new Eleicao();
     private static Map<String, Candidato> candidatos = new HashMap<>();
     private static Map<Integer, Partido> partidos = new HashMap<>();
+    private static String codigoMunicipio;
     private int numVagas;
 
     private Eleicao() {}
 
-    public static Eleicao getInstance() {
+    public static Eleicao getInstance(String codigoMunicipio) {
+        Eleicao.codigoMunicipio = codigoMunicipio;
         return INSTANCE;
     }
 
@@ -116,7 +118,8 @@ public class Eleicao {
 
     public boolean isValido(Candidato candidato) {
         return candidato.getCargo() == Cargo.VEREADOR && 
-            candidato.getSituacao() != Situacao.INVALIDO;
+            candidato.getSituacao() != Situacao.INVALIDO &&
+            candidato.getCodigoMunicipio().equals(codigoMunicipio);
     }
 
     public boolean isEleito(Candidato candidato) {
@@ -131,6 +134,10 @@ public class Eleicao {
 
     public List<Partido> getPartidos() {
         return new ArrayList<>(partidos.values());
+    }
+
+    public String getCodigoMunicipio() {
+        return codigoMunicipio;
     }
 
     public int getNumCandidatos() {

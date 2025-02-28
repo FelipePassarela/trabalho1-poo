@@ -12,7 +12,7 @@ import util.CSVUtil;
 
 public class VotoReader {
     
-    public static Set<Voto> readVotos(String filePath) {
+    public static Set<Voto> readVotos(String filePath, String codigoMunicipio) {
         Set<Voto> votos = new HashSet<>();
 
         try (BufferedReader br = CSVUtil.getReader(filePath)) {
@@ -22,8 +22,9 @@ public class VotoReader {
             while ((line = br.readLine()) != null) {
                 String[] fields = line.split(";");
                 fields = CSVUtil.cleanFields(fields);
-                Voto voto = parseVoto(headerIndexMap, fields);
-                votos.add(voto);
+                Voto voto = parseVoto(headerIndexMap, fields, codigoMunicipio);
+                
+                if (voto != null) votos.add(voto);
             }
         } catch (IOException e) {
             System.err.println("Erro ao ler arquivo de votos: " + e.getMessage());
@@ -32,11 +33,15 @@ public class VotoReader {
         return votos;
     }
 
-    private static Voto parseVoto(Map<String, Integer> headerIndexMap, String[] fields) {
+    private static Voto parseVoto(Map<String, Integer> headerIndexMap, String[] fields, String codigoMunicipio) {
         Cargo cargo = Cargo.valueOfCodigo(Integer.parseInt(fields[headerIndexMap.get("CD_CARGO")]));
-        String codigoMunicipio = fields[headerIndexMap.get("CD_MUNICIPIO")];
+        String cdgMunicipio = fields[headerIndexMap.get("CD_MUNICIPIO")];
         int numVotavel = Integer.parseInt(fields[headerIndexMap.get("NR_VOTAVEL")]);
         int quantidade = Integer.parseInt(fields[headerIndexMap.get("QT_VOTOS")]);
+
+        if (!cdgMunicipio.equals(codigoMunicipio)) {
+            return null;
+        }
 
         return new Voto(cargo, codigoMunicipio, numVotavel, quantidade);
     }
