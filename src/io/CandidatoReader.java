@@ -29,6 +29,7 @@ public class CandidatoReader {
                 String[] fields = line.split(";");
                 fields = CSVUtil.cleanFields(fields);
                 Candidato candidato = parseCandidato(headerIndexMap, fields);
+                
                 candidatos.add(candidato);
             }
         } catch (IOException e) {
