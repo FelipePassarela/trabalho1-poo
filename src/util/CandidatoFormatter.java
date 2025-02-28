@@ -10,7 +10,7 @@ public class CandidatoFormatter {
         NumberFormat nf = NumberFormat.getInstance(Locale.forLanguageTag("pt-BR"));
         boolean participaFederacao = candidato.getNumFederacao() != -1;
 
-        return String.format("%s %s (%s, %s votos)", 
+        return String.format("%s%s (%s, %s votos)", 
             participaFederacao ? "*" : "",
             candidato.getNomeUrna().toUpperCase(),
             candidato.getPartido().getSigla(),
