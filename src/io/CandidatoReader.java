@@ -19,7 +19,7 @@ import util.CSVUtil;
  * Leitor de candidatos a partir de arquivo CSV.
  */
 public class CandidatoReader {
-    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+    private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
     /**
      * Lê os candidatos de um arquivo CSV e retorna um conjunto de candidatos.
@@ -64,7 +64,7 @@ public class CandidatoReader {
             Integer.parseInt(fields[headerIndexMap.get("NR_PARTIDO")]), 
             fields[headerIndexMap.get("SG_PARTIDO")]);
         int numFederacao = Integer.parseInt(fields[headerIndexMap.get("NR_FEDERACAO")]);
-        LocalDate dataNascimento = LocalDate.parse(fields[headerIndexMap.get("DT_NASCIMENTO")], FORMATTER);
+        LocalDate dataNascimento = LocalDate.parse(fields[headerIndexMap.get("DT_NASCIMENTO")], DATE_FORMATTER);
         Situacao situacao = Situacao.valueOfCodigo(Integer.parseInt(fields[headerIndexMap.get("CD_SIT_TOT_TURNO")]));
         Genero genero = Genero.valueOfCodigo(Integer.parseInt(fields[headerIndexMap.get("CD_GENERO")]));
       
