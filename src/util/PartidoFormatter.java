@@ -5,8 +5,17 @@ import java.util.Locale;
 
 import domain.Partido;
 
+/**
+ * Classe utilitária para formatação de objetos Partido.
+ */
 public class PartidoFormatter {
 
+    /**
+     * Formata as informações de um Partido para exibição.
+     *
+     * @param partido objeto Partido a ser formatado
+     * @return String formatada com informações do partido
+     */
     public static String format(Partido partido) {
         NumberFormat nf = NumberFormat.getInstance(Locale.forLanguageTag("pt-BR"));
         String totalVotosStr = nf.format(partido.getNumVotosTotais());

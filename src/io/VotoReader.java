@@ -10,8 +10,19 @@ import domain.Voto;
 import enums.Cargo;
 import util.CSVUtil;
 
+/**
+ * Leitor de votos a partir de arquivo CSV.
+ */
 public class VotoReader {
-    
+
+    /**
+     * Lê os votos de um arquivo CSV e retorna um conjunto de votos
+     * filtrados pelo código do município.
+     *
+     * @param filePath o caminho do arquivo CSV
+     * @param codigoMunicipio o código do município a ser filtrado
+     * @return um conjunto de votos
+     */
     public static Set<Voto> readVotos(String filePath, String codigoMunicipio) {
         Set<Voto> votos = new HashSet<>();
 
@@ -33,6 +44,14 @@ public class VotoReader {
         return votos;
     }
 
+    /**
+     * Processa uma linha de dados do CSV e cria um objeto Voto.
+     *
+     * @param headerIndexMap mapeamento de cabeçalhos para índice
+     * @param fields os campos da linha
+     * @param codigoMunicipio o código do município para validação
+     * @return um objeto Voto ou null se o município não coincidir
+     */
     private static Voto parseVoto(Map<String, Integer> headerIndexMap, String[] fields, String codigoMunicipio) {
         Cargo cargo = Cargo.valueOfCodigo(Integer.parseInt(fields[headerIndexMap.get("CD_CARGO")]));
         String cdgMunicipio = fields[headerIndexMap.get("CD_MUNICIPIO")];

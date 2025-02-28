@@ -6,6 +6,9 @@ import enums.Cargo;
 import enums.Genero;
 import enums.Situacao;
 
+/**
+ * Representa um candidato com suas informações pessoais e de votação.
+ */
 public class Candidato implements Comparable<Candidato> {
     private String codigoMunicipio;
     private Cargo cargo;
@@ -40,6 +43,11 @@ public class Candidato implements Comparable<Candidato> {
         this.genero = genero;
     }
 
+    /**
+     * Incrementa os votos do candidato.
+     *
+     * @param numVotos quantidade de votos a incrementar
+     */
     public void incrementaVotos(int numVotos) {
         this.numVotos += numVotos;
     }

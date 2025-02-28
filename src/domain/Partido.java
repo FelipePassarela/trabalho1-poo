@@ -3,6 +3,9 @@ package domain;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Representa um partido político, armazenando votos e informações dos candidatos.
+ */
 public class Partido implements Comparable<Partido> {
     private int numero;
     private String sigla;
@@ -16,6 +19,12 @@ public class Partido implements Comparable<Partido> {
         this.sigla = sigla;
     }
 
+    /**
+     * Incrementa os votos nominais do partido.
+     *
+     * @param numVotos quantidade de votos a incrementar
+     * @throws IllegalArgumentException se numVotos for negativo
+     */
     public void incrementaVotosNominais(int numVotos) {
         if (numVotos < 0) {
             throw new IllegalArgumentException("Número de votos nominais não pode ser negativo");
@@ -23,6 +32,12 @@ public class Partido implements Comparable<Partido> {
         numVotosNominais += numVotos;
     }
 
+    /**
+     * Incrementa os votos de legenda do partido.
+     *
+     * @param numVotos quantidade de votos a incrementar
+     * @throws IllegalArgumentException se numVotos for negativo
+     */
     public void incrementaVotosLegenda(int numVotos) {
         if (numVotos < 0) {
             throw new IllegalArgumentException("Número de votos de legenda não pode ser negativo");
@@ -30,10 +45,20 @@ public class Partido implements Comparable<Partido> {
         numVotosLegenda += numVotos;
     }
 
+    /**
+     * Adiciona um candidato ao partido.
+     *
+     * @param candidato candidato a ser adicionado
+     */
     public void addCandidato(Candidato candidato) {
         candidatos.add(candidato);
     }
     
+    /**
+     * Adiciona um candidato eleito ao partido.
+     *
+     * @param candidato candidato eleito
+     */
     public void addCandidatoEleito(Candidato candidato) {
         candidatosEleitos.add(candidato);
     }

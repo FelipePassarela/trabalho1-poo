@@ -6,6 +6,9 @@ import domain.Partido;
 import domain.Voto;
 import enums.Cargo;
 
+/**
+ * Serviço responsável por computar os votos e atualizar candidatos e partidos.
+ */
 public class VotacaoService {
     private Eleicao eleicao;
 
@@ -13,6 +16,11 @@ public class VotacaoService {
         this.eleicao = eleicao;
     }
 
+    /**
+     * Processa e computa os votos, atualizando candidatos e partidos conforme necessário.
+     *
+     * @param votos coleção de votos a serem computados
+     */
     public void computaVotos(Iterable<Voto> votos) {
         for (Voto voto : votos) {
             if (!isValido(voto)) {
@@ -35,6 +43,12 @@ public class VotacaoService {
         }
     }
 
+    /**
+     * Verifica se o voto está dentro dos parâmetros válidos.
+     *
+     * @param voto objeto Voto a ser validado
+     * @return true se o voto é válido; false caso contrário
+     */
     private static boolean isValido(Voto voto) {
         boolean isNumValido = !(voto.getNumVotavel() >= 95 && voto.getNumVotavel() <= 98);
         return voto.getCargo() == Cargo.VEREADOR && isNumValido;

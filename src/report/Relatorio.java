@@ -14,6 +14,9 @@ import enums.Genero;
 import util.CandidatoFormatter;
 import util.PartidoFormatter;
 
+/**
+ * Responsável por gerar e imprimir diversos relatórios referentes à eleição.
+ */
 public class Relatorio {
     Eleicao eleicao;
 
@@ -21,10 +24,16 @@ public class Relatorio {
         this.eleicao = eleicao;
     }
 
+    /**
+     * Imprime o número de vagas disponíveis.
+     */
     public void imprimeNumVagas() {
         System.out.println("Número de vagas: " + eleicao.getNumVagas() + "\n");
     }
 
+    /**
+     * Imprime os vereadores eleitos.
+     */
     public void imprimeVereadoresEleitos() {
         System.out.println("Vereadores eleitos:");
 
@@ -35,6 +44,9 @@ public class Relatorio {
         }
     }
 
+    /**
+     * Imprime os candidatos mais votados (respeitando o número de vagas).
+     */
     public void imprimeCandidatosMaisVotados() {
         System.out.print("\nCandidatos mais votados ");
         System.out.println("(em ordem decrescente de votação e respeitando número de vagas):");
@@ -49,6 +61,9 @@ public class Relatorio {
         }
     }
 
+    /**
+     * Imprime os candidatos que não foram eleitos, mas teriam sido majoritariamente.
+     */
     public void imprimeCandidatosNaoEleitos() {
         System.out.println("\nTeriam sido eleitos se a votação fosse majoritária, e não foram eleitos:");
         System.out.println("(com sua posição no ranking de mais votados)");
@@ -65,6 +80,9 @@ public class Relatorio {
         }
     }
 
+    /**
+     * Imprime os candidatos eleitos que se beneficiaram do sistema proporcional.
+     */
     public void imprimeCandidatosBeneficiados() {
         System.out.println("\nEleitos, que se beneficiaram do sistema proporcional:");
         System.out.println("(com sua posição no ranking de mais votados)");
@@ -83,6 +101,9 @@ public class Relatorio {
         }
     }
 
+    /**
+     * Imprime o ranking dos partidos de acordo com a votação.
+     */
     public void imprimeRankingPartidos() {
         System.out.println("\nVotação dos partidos e número de candidatos eleitos:");
 
@@ -95,6 +116,9 @@ public class Relatorio {
         }
     }
 
+    /**
+     * Imprime o primeiro e o último candidato de cada partido.
+     */
     public void imprimePrimeiroUltimoCandidatoPorPartido() {
         System.out.println("\nPrimeiro e último colocados de cada partido:");
 
@@ -150,6 +174,11 @@ public class Relatorio {
         });
     }
 
+    /**
+     * Imprime a distribuição dos eleitos por faixa etária, considerando a data da eleição.
+     *
+     * @param dataEleicao data da eleição para cálculo da idade
+     */
     public void imprimeDistribuicaoFaixaEtaria(LocalDate dataEleicao) {
         System.out.println("\nEleitos, por faixa etária (na data da eleição):");
 
@@ -190,6 +219,9 @@ public class Relatorio {
         }
     }
 
+    /**
+     * Imprime a distribuição dos eleitos por gênero.
+     */
     public void imprimeDistribuicaoGenero() {
         List<Candidato> candidatosEleitos = eleicao.getCandidatosEleitos();
         int femininoCount = 0;
@@ -215,6 +247,9 @@ public class Relatorio {
         System.out.printf("Masculino: %d (%s)%n", masculinoCount, percentualMasculino);  
     }
 
+    /**
+     * Imprime o total de votos válidos, nominais e de legenda.
+     */
     public void imprimeTotalVotos() {        
         int totalVotos = eleicao.getTotalVotos();
         int totalVotosNominais = eleicao.getTotalVotosNominais();

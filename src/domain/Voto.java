@@ -2,6 +2,9 @@ package domain;
 
 import enums.Cargo;
 
+/**
+ * Representa um voto com informações sobre o cargo, município e quantidade.
+ */
 public class Voto {
     private final Cargo cargo;
     private final String codigoMunicipio;
@@ -31,6 +34,11 @@ public class Voto {
         return quantidade;
     }
 
+    /**
+     * Indica se o voto é do tipo nominal.
+     *
+     * @return true se o voto é nominal; false caso contrário
+     */
     public boolean isNominal() {
         return numVotavel > 99;
     }

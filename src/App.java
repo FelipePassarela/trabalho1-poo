@@ -10,7 +10,16 @@ import io.VotoReader;
 import report.Relatorio;
 import services.VotacaoService;
 
+/**
+ * Classe principal que inicia a aplicação e orquestra a execução da eleição.
+ */
 public class App {
+    
+    /**
+     * Método principal que recebe os argumentos, lê os arquivos CSV e imprime os relatórios.
+     *
+     * @param args argumentos: <código_municipio> <candidatos.csv> <votos.csv> <data_da_eleição>
+     */
     public static void main(String[] args) {
         if (args.length != 4) {
             throw new IllegalArgumentException(

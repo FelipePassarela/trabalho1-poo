@@ -15,9 +15,18 @@ import enums.Genero;
 import enums.Situacao;
 import util.CSVUtil;
 
+/**
+ * Leitor de candidatos a partir de arquivo CSV.
+ */
 public class CandidatoReader {
     private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
+    /**
+     * Lê os candidatos de um arquivo CSV e retorna um conjunto de candidatos.
+     *
+     * @param filePath o caminho do arquivo CSV
+     * @return um conjunto de candidatos
+     */
     public static Set<Candidato> readCandidatos(String filePath) {
         Set<Candidato> candidatos = new HashSet<>();
 
@@ -39,6 +48,13 @@ public class CandidatoReader {
         return candidatos;
     }
 
+    /**
+     * Processa uma linha de dados do CSV criando um objeto Candidato.
+     *
+     * @param headerIndexMap o mapeamento de cabeçalhos para índice
+     * @param fields os campos da linha
+     * @return um objeto Candidato
+     */
     private static Candidato parseCandidato(Map<String, Integer> headerIndexMap, String[] fields) {
         String codigoMunicipio = fields[headerIndexMap.get("SG_UE")];
         Cargo cargo = Cargo.valueOfCodigo(Integer.parseInt(fields[headerIndexMap.get("CD_CARGO")]));
