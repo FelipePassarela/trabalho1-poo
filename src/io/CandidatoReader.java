@@ -36,7 +36,7 @@ public class CandidatoReader {
             
             while ((line = br.readLine()) != null) {
                 String[] fields = line.split(";");
-                fields = CSVUtil.cleanFields(fields);
+                CSVUtil.cleanFields(fields);
                 Candidato candidato = parseCandidato(headerIndexMap, fields);
                 
                 candidatos.add(candidato);

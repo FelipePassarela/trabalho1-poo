@@ -44,12 +44,10 @@ public class CSVUtil {
      * Remove aspas e espaços dos campos de uma linha.
      *
      * @param fields array de campos extraídos do CSV
-     * @return array de campos limpos
      */
-    public static String[] cleanFields(String[] fields) {
+    public static void cleanFields(String[] fields) {
         for (int i = 0; i < fields.length; i++) {
             fields[i] = fields[i].replace("\"", "").trim();
         }
-        return fields;
     }
 }

@@ -32,7 +32,7 @@ public class VotoReader {
 
             while ((line = br.readLine()) != null) {
                 String[] fields = line.split(";");
-                fields = CSVUtil.cleanFields(fields);
+                CSVUtil.cleanFields(fields);
                 Voto voto = parseVoto(headerIndexMap, fields, codigoMunicipio);
                 
                 if (voto != null) votos.add(voto);
