@@ -13,7 +13,7 @@ import services.VotacaoService;
 /**
  * Classe principal que inicia a aplicação e orquestra a execução da eleição.
  */
-public class App {
+public class Main {
     
     /**
      * Método principal que recebe os argumentos, lê os arquivos CSV e imprime os relatórios.
